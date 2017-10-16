@@ -8,7 +8,13 @@ class OrderConsumer < Racecar::Consumer
   def process(message)
     $stdout.puts "Received message: #{message.inspect}"
 
-    message_value = Oj.load(message.value)
+    begin
+      message_value = Oj.load(message.value)
+    rescue Exception => ex
+      $stdout.puts ex.message
+      $stdout.puts ex.backtrace
+      return true
+    end
 
     order = Order.where(id: message_value.fetch('order_id')).first_or_create!({
       line_items: message_value.fetch('line_items'),
