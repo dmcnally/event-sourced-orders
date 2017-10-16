@@ -1,6 +1,13 @@
+$stdout.puts "Loading ActiveRecord"
+
 require 'active_record'
 require 'yaml'
 require 'erb'
 
-db_config = YAML::load(ERB.new(File.read('db/config.yml')).result).fetch(ENV.fetch('APP_ENV', 'development'))
+$stdout.puts "Configuring ActiveRecord"
+
+path = File.join(File.dirname(__FILE__), '../db/config.yml')
+db_config = YAML::load(ERB.new(File.read(path)).result).fetch(ENV.fetch('RACK_ENV', 'development'))
 ActiveRecord::Base.establish_connection(db_config)
+
+$stdout.puts "Configured ActiveRecord"
