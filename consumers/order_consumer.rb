@@ -10,9 +10,11 @@ class OrderConsumer < Racecar::Consumer
 
     message_value = Oj.load(message.value)
 
-    Order.where(id: message_value.fetch('order_id')).first_or_create!({
+    order = Order.where(id: message_value.fetch('order_id')).first_or_create!({
       line_items: message_value.fetch('line_items'),
       created_at: message_value.fetch('timestamp')
     })
+
+    $stdout.puts "Created order ##{order.id}"
   end
 end
