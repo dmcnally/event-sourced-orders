@@ -14,7 +14,8 @@
       <tr>
         <td><%= order.id %></td>
         <td>
-          <% order.line_items.each do |line_item| %>
+          <% order.line_items.each_with_index do |line_item, index| %>
+            <% if index > 0 %><br /><% end %>
             <%= line_item['quantity'] %> &times;
             <%= line_item['title'] %>
           <% end %>
