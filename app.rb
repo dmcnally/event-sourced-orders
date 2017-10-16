@@ -12,5 +12,5 @@ configure do
 end
 
 get '/' do
-  erb :order_index, locals: { orders: Order.order('created_at desc') }
+  erb :orders_index, locals: { orders: Order.order('created_at desc') }
 end
