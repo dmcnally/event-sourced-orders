@@ -1,0 +1,26 @@
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Line Items</th>
+      <th>Placed At</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td>
+          <% order.line_items.each do |line_item| %>
+            <%= line_item['quantity'] %> &times;
+            <%= line_item['title'] %>
+          <% end %>
+        </td>
+        <td><%= order.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

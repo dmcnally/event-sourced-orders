@@ -1,0 +1,48 @@
+{
+  "name": "event-sourced-orders",
+  "description": "A Kafka consumer that prepares orders",
+  "keywords": [
+    "sinatra",
+    "ruby",
+    "kafka"
+  ],
+  "website": "https://github.com/ryantownsend/event-sourced-orders",
+  "repository": "https://github.com/ryantownsend/event-sourced-orders",
+  "success_url": "/",
+  "stack": "heroku-16",
+  "image": "heroku/ruby",
+  "env": {
+    "WEB_CONCURRENCY": {
+      "description": "The number of Puma web processes.",
+      "value": "2"
+    },
+    "WEB_THREADS": {
+      "description": "The number of Puma web threads.",
+      "value": "5"
+    },
+    "RACK_ENV": {
+      "description": "The Rack environment to use.",
+      "value": "production"
+    }
+  },
+  "formation": [
+    {
+      "process": "web",
+      "quantity": 1,
+      "size": "hobby"
+    },
+    {
+      "process": "consumer",
+      "quantity": 1,
+      "size": "hobby"
+    }
+  ],
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.6"
+      }
+    }
+  ]
+}
