@@ -7,5 +7,18 @@ class OrderConsumer < Racecar::Consumer
 
   def process(message)
     $stdout.puts "Received message: #{message.inspect}"
+
+    message_value = Oj.load(message.value)
+
+    order = Order.where(id: message_value.fetch('order_id')).first_or_create!({
+      line_items: message_value.fetch('line_items'),
+      created_at: message_value.fetch('timestamp')
+    })
+
+    $stdout.puts "Created order ##{order.id}"
+  rescue Exception => ex
+    $stdout.puts ex.message
+    $stdout.puts ex.backtrace
+    raise
   end
 end
