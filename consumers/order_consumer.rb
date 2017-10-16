@@ -16,9 +16,5 @@ class OrderConsumer < Racecar::Consumer
     })
 
     $stdout.puts "Created order ##{order.id}"
-  rescue Exception => ex
-    $stdout.puts ex.message
-    $stdout.puts ex.backtrace
-    raise
   end
 end

@@ -1,4 +1,5 @@
 require 'racecar'
+require_relative '../consumers/order_consumer'
 
 module Racecar
   module RailsConfigFileLoader
@@ -17,7 +18,7 @@ begin
     config.ssl_client_cert = ENV['KAFKA_CLIENT_CERT']
     config.group_id_prefix = "#{ENV['KAFKA_PREFIX']}orders"
     config.ssl_client_cert_key = ENV['KAFKA_CLIENT_CERT_KEY']
-    config.max_wait_time = 2
+    config.max_wait_time = 1
     config.log_level = 'debug'
   end
 
@@ -27,7 +28,3 @@ rescue Exception => ex
   $stderr.puts ex.backtrace
   raise
 end
-
-$stdout.puts "Loading Consumers"
-require_relative '../consumers/order_consumer'
-$stdout.puts "Loaded Consumers"
