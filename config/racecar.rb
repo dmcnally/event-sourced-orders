@@ -18,6 +18,7 @@ begin
     config.group_id_prefix = "#{ENV['KAFKA_PREFIX']}orders",
     config.ssl_client_cert_key = ENV['KAFKA_CLIENT_CERT_KEY'],
     config.max_wait_time = 2
+    config.log_level = :debug
   end
 
   $stdout.puts "Configured Racecar"
