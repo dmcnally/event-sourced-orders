@@ -1,7 +1,7 @@
 require 'racecar'
 require 'logger'
 
-autoload :OrderConsumer, 'consumers/order_consumer'
+require_relative 'consumers/order_consumer'
 
 Racecar.config.load({
   brokers: ENV.fetch('KAFKA_URL').split(','),
