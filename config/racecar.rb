@@ -1,6 +1,14 @@
 require 'racecar'
 require_relative '../consumers/order_consumer'
 
+module Racecar
+  module RailsConfigFileLoader
+    def self.load!
+      # no-op
+    end
+  end
+end
+
 Racecar.config.tap do |config|
   config.brokers = ENV.fetch('KAFKA_URL').split(','),
   config.client_id = "#{ENV['KAFKA_PREFIX']}orders",
