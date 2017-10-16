@@ -1,5 +1,4 @@
 require 'racecar'
-require_relative '../consumers/order_consumer'
 
 module Racecar
   module RailsConfigFileLoader
@@ -27,3 +26,7 @@ rescue Exception => ex
   $stderr.puts ex.backtrace
   raise
 end
+
+$stdout.puts "Loading Consumers"
+require_relative '../consumers/order_consumer'
+$stdout.puts "Loaded Consumers"
