@@ -9,7 +9,9 @@ class OrderConsumer < Racecar::Consumer
     message_value = Oj.load(message.value)
 
     order = Order.where(id: message_value.fetch('order_id')).first_or_create!({
-      line_items: message_value.fetch('line_items'),
+      line_items: message_value.fetch('line_items').map { |li|
+        { 'quantity' => Integer(li['quantity']) * 2, 'title' => li['title'] }
+      },
       created_at: message_value.fetch('timestamp')
     })
   end
