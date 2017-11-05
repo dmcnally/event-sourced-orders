@@ -17,30 +17,30 @@
     <table class='c-orders-table'>
       <thead>
         <tr class='c-orders-table__row'>
-          <th class='c-orders-table__cell'>Order ID</th>
-          <th class='c-orders-table__cell'>Line Items</th>
-          <th class='c-orders-table__cell'>Total</th>
-          <th class='c-orders-table__cell'>Placed At</th>
+          <th class='c-orders-table__cell c-orders-table__cell--heading u-text-left'>Order ID</th>
+          <th class='c-orders-table__cell c-orders-table__cell--heading u-text-left'>Line Items</th>
+          <th class='c-orders-table__cell c-orders-table__cell--heading u-text-left'>Total</th>
+          <th class='c-orders-table__cell c-orders-table__cell--heading u-text-right'>Placed At</th>
         </tr>
       </thead>
 
       <tbody>
         <% orders.each do |order| %>
-          <tr class='c-orders-table__row'>
-            <td class='c-orders-table__cell'>
+          <tr class='c-orders-table__row c-orders-table__row--body'>
+            <td class='c-orders-table__cell c-orders-table__cell--heading u-text-left'>
               <%= order.id %>
             </td>
-            <td class='c-orders-table__cell'>
+            <td class='c-orders-table__cell u-text-left'>
               <% order.line_items.each_with_index do |line_item, index| %>
                 <% if index > 0 %><br /><% end %>
                 <%= line_item['quantity'] %> &times;
                 <%= line_item['title'] %>
               <% end %>
             </td>
-            <td class='c-orders-table__cell'>
+            <td class='c-orders-table__cell u-text-left'>
               <%= "%.2f" % (BigDecimal.new(order.total) / 100).round(2) %>
             </td>
-            <td class='c-orders-table__cell'>
+            <td class='c-orders-table__cell u-text-right'>
               <%= order.created_at %>
             </td>
           </tr>

@@ -24,13 +24,21 @@ h1 {
 .c-orders-table {
   width: 100%;
   border-collapse: collapse;
+  background: #fff;
+  box-shadow: rgba(0,0,0,0.2) 0 2px 2px;
 }
   .c-orders-table__row {
-    margin-bottom: 1px;
-    background: #fff;
-    box-shadow: rgba(0,0,0,0.2) 0 2px 2px;
   }
+    .c-orders-table__row--body {
+      border-top: 1px solid #ddd;
+    }
   .c-orders-table__cell {
+    margin-bottom: 1px;
     vertical-align: top;
     padding: 10px 15px;
   }
+    .c-orders-table__cell--heading {
+      font-weight: bold;
+    }
+.u-text-left { text-align: left }
+.u-text-right { text-align: right }
