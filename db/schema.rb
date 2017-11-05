@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016110800) do
+ActiveRecord::Schema.define(version: 20171016170300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20171016110800) do
   create_table "orders", id: :uuid, default: nil, force: :cascade do |t|
     t.jsonb "line_items", null: false
     t.datetime "created_at", null: false
+    t.integer "total", null: false
   end
 
 end

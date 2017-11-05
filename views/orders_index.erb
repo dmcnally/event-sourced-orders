@@ -1,27 +1,52 @@
-<h1>Orders</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes" />
 
-<table>
-  <thead>
-    <tr>
-      <th>Order ID</th>
-      <th>Line Items</th>
-      <th>Placed At</th>
-    </tr>
-  </thead>
+    <title>Event-driven Cart</title>
 
-  <tbody>
-    <% orders.each do |order| %>
-      <tr>
-        <td><%= order.id %></td>
-        <td>
-          <% order.line_items.each_with_index do |line_item, index| %>
-            <% if index > 0 %><br /><% end %>
-            <%= line_item['quantity'] %> &times;
-            <%= line_item['title'] %>
-          <% end %>
-        </td>
-        <td><%= order.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <link rel='stylesheet' href='/styles.css' />
+  </head>
+
+  <body>
+
+    <h1>Orders</h1>
+
+    <table class='c-orders-table'>
+      <thead>
+        <tr class='c-orders-table__row'>
+          <th class='c-orders-table__cell'>Order ID</th>
+          <th class='c-orders-table__cell'>Line Items</th>
+          <th class='c-orders-table__cell'>Total</th>
+          <th class='c-orders-table__cell'>Placed At</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% orders.each do |order| %>
+          <tr class='c-orders-table__row'>
+            <td class='c-orders-table__cell'>
+              <%= order.id %>
+            </td>
+            <td class='c-orders-table__cell'>
+              <% order.line_items.each_with_index do |line_item, index| %>
+                <% if index > 0 %><br /><% end %>
+                <%= line_item['quantity'] %> &times;
+                <%= line_item['title'] %>
+              <% end %>
+            </td>
+            <td class='c-orders-table__cell'>
+              <%= "%.2f" % (BigDecimal.new(order.total) / 100).round(2) %>
+            </td>
+            <td class='c-orders-table__cell'>
+              <%= order.created_at %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </body>
+</html>
