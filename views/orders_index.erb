@@ -27,20 +27,20 @@
       <tbody>
         <% orders.each do |order| %>
           <tr class='c-orders-table__row c-orders-table__row--body'>
-            <td class='c-orders-table__cell c-orders-table__cell--heading u-text-left'>
+            <td class='c-orders-table__cell c-orders-table__cell--body c-orders-table__cell--heading u-text-left'>
               <%= order.id %>
             </td>
-            <td class='c-orders-table__cell u-text-left'>
+            <td class='c-orders-table__cell c-orders-table__cell--body u-text-left'>
               <% order.line_items.each_with_index do |line_item, index| %>
                 <% if index > 0 %><br /><% end %>
                 <%= line_item['quantity'] %> &times;
                 <%= line_item['title'] %>
               <% end %>
             </td>
-            <td class='c-orders-table__cell u-text-left'>
+            <td class='c-orders-table__cell c-orders-table__cell--body u-text-left'>
               $<%= "%.2f" % (BigDecimal.new(order.total) / 100).round(2) %>
             </td>
-            <td class='c-orders-table__cell u-text-right'>
+            <td class='c-orders-table__cell c-orders-table__cell--body u-text-right'>
               <%= order.created_at %>
             </td>
           </tr>
