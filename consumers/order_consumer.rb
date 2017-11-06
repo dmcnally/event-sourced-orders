@@ -16,7 +16,7 @@ class OrderConsumer < Racecar::Consumer
     order.created_at = message_value.fetch(:timestamp)
     order.total = message_value.fetch(:line_items).map { |li|
       Integer(li.fetch(:price)) * Integer(li.fetch(:quantity))
-    }.reduce(:+) * 2
+    }.reduce(:+)
 
     # persist the order
     order.save!
